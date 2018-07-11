@@ -24,6 +24,7 @@ public class EmployeeCURDApp {
 		TransportClient client = new PreBuiltTransportClient(settings)
 				.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
 		
+		
 		createEmployee(client);
 		getEmployee(client);
 		updateEmployee(client);
