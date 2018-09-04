@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:pre="http://www.shijun.com/schema/strategy"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.shijun.com/schema/strategy http://www.shijun.com/schema/strategy.xsd">
+
+	<pre:strategy id="strategyFrist" interface="org.test.spring.schema.strategy.FristStrategy"
+		url="tcp://strategy/frist" />
+	
+	<pre:strategy id="strategyFrist2" interface="org.test.spring.schema.strategy.FristStrategy2"
+	url="tcp://strategy/frist2" />
+
+</beans>

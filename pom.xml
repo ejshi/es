@@ -90,5 +90,6 @@
 
 	<modules>
 		<module>test-es-first</module>
+		<module>test-spring-schema</module>
 	</modules>
 </project>
