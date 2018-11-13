@@ -36,25 +36,6 @@
 				<version>23.0</version>
 			</dependency>
 
-			<!-- es -->
-			<dependency>
-				<groupId>org.elasticsearch</groupId>
-				<artifactId>elasticsearch</artifactId>
-				<version>5.2.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.elasticsearch.client</groupId>
-				<artifactId>transport</artifactId>
-				<version>5.2.2</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>elasticsearch</artifactId>
-						<groupId>org.elasticsearch</groupId>
-					</exclusion>
-				</exclusions>
-
-			</dependency>
-
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-api</artifactId>
@@ -91,5 +72,7 @@
 	<modules>
 		<module>test-es-first</module>
 		<module>test-spring-schema</module>
+		<module>es-high-level-rest-client</module>
+		<module>springmvc-mock-test</module>
 	</modules>
 </project>
