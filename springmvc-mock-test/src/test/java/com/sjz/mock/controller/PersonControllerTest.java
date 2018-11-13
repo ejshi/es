@@ -2,6 +2,7 @@ package com.sjz.mock.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sjz.mock.model.Person;
+import org.hamcrest.Matchers;
 import org.hamcrest.core.Is;
 import org.junit.After;
 import org.junit.Before;
@@ -78,6 +79,9 @@ public class PersonControllerTest {
     public void getPersonTest() throws Exception {
         String contentAsString = mvc.perform(MockMvcRequestBuilders.get("/person/get").param("name", "zhangsan"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                //返回的数据是否含有“zhangsan”数据
+//                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("zhangsan")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", Is.is("zhangsan"))) // 判断返回数据结果name的值为zhangsan
                 .andReturn().getResponse().getContentAsString();
 
         System.out.println(contentAsString);
