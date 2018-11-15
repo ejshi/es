@@ -2,7 +2,6 @@ package com.sjz.mock.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sjz.mock.model.Person;
-import org.hamcrest.Matchers;
 import org.hamcrest.core.Is;
 import org.junit.After;
 import org.junit.Before;
@@ -19,6 +18,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -151,8 +154,24 @@ public class PersonControllerTest {
      */
     @Test
     public void downLoadFile() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/io/download"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+        MockHttpServletResponse response = mvc.perform(MockMvcRequestBuilders.get("/io/download"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andDo(MockMvcResultHandlers.print())
+                .andReturn().getResponse();
+
+
+        //获取数据流中的字节数组
+        byte[] contentAsByteArray = response.getContentAsByteArray();
+
+        //定义一个文件（文件后缀和你要测试的文件下载后缀一致即可），将字节数组写到你指定的文件中
+        File file = new File("d:\\test1.jpg");
+        try(OutputStream outputStream = new FileOutputStream(file)){
+            outputStream.write(contentAsByteArray);
+            outputStream.flush();
+        }
+
+        //response.getBufferSize()获取流大小不准确，可以通过response.getContentAsByteArray().length
+        System.out.println("下载的文件大小==========="+contentAsByteArray.length);
         System.out.println("========== 下载完成 ==========");
     }
 }
